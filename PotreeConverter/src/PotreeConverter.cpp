@@ -439,7 +439,7 @@ void PotreeConverter::convert(){
 
 				stringstream ssMessage;
 
-				ssMessage.imbue(std::locale(""));
+				// ssMessage.imbue(std::locale(""));
 				ssMessage << "INDEXING: ";
 				ssMessage << pointsProcessed << " points processed; ";
 				ssMessage << writer->numAccepted << " points written; ";

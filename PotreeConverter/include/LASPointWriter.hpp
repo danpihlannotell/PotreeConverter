@@ -43,7 +43,7 @@ public:
 		header.version_minor = 2;
 		header.header_size = 227;
 		header.offset_to_point_data = 227;
-		header.point_data_format = 2;
+		header.point_data_format = 1;
 		header.min_x = aabb.min.x;
 		header.min_y = aabb.min.y;
 		header.min_z = aabb.min.z;

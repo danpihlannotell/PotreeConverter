@@ -285,7 +285,7 @@ void printArguments(PotreeArguments &a){
 
 
 int main(int argc, char **argv){
-	cout.imbue(std::locale(""));
+	// cout.imbue(std::locale(""));
 	
 	try{
 		PotreeArguments a = parseArguments(argc, argv);
