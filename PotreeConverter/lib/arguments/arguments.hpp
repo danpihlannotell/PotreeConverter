@@ -32,12 +32,12 @@ public:
 
 };
 
-template<> vector<string> AValue::as<vector<string>>(vector<string> alternative) {
+template<> std::vector<std::string> AValue::as<vector<string>>(vector<string> alternative) {
 	return !values.empty() ? values : alternative;
 }
 
-template<> vector<string> AValue::as<vector<string>>() {
-	return !values.empty() ? values : vector<string>{};
+template<> std::vector<std::string> AValue::as<vector<string>>() {
+	return !values.empty() ? values : std::vector<std::string>{};
 }
 
 template<> vector<double> AValue::as<vector<double>>(vector<double> alternative) {
@@ -174,7 +174,7 @@ public:
 
 	vector<string> tokens;
 	vector<Argument> argdefs;
-	unordered_map<string, vector<string>> map;
+	unordered_map<string, std::vector<std::string>> map;
 
 	Arguments(int argc, char **argv, bool ignoreFirst = true) {
 		this->argc = argc;

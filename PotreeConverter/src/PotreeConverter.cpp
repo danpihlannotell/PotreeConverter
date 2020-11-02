@@ -75,7 +75,7 @@ PointReader *PotreeConverter::createPointReader(string path, PointAttributes poi
 	return reader;
 }
 
-PotreeConverter::PotreeConverter(string executablePath, string workDir, vector<string> sources){
+PotreeConverter::PotreeConverter(string executablePath, string workDir, std::vector<std::string> sources){
     this->executablePath = executablePath;
 	this->workDir = workDir;
 	this->sources = sources;
@@ -263,7 +263,7 @@ void PotreeConverter::generatePage(string name){
 	//}
 }
 
-void writeSources(string path, vector<string> sourceFilenames, vector<int> numPoints, vector<AABB> boundingBoxes, string projection){
+void writeSources(string path, std::vector<std::string> sourceFilenames, vector<int> numPoints, vector<AABB> boundingBoxes, string projection){
 	Document d(rapidjson::kObjectType);
 
 	AABB bb;

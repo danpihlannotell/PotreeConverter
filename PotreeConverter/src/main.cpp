@@ -245,12 +245,12 @@ PotreeArguments parseArguments(int argc, char **argv){
 		a.diagonalFraction = 200;
 	}
 
-   try {
-    auto absolutePath = fs::canonical(fs::system_complete(argv[0]));
+   /*try {
+    auto absolutePath = fs::canonical(fs::__system_complete(argv[0]));
     a.executablePath = absolutePath.parent_path().string();
    } catch (const fs::filesystem_error &e) {
      // do nothing
-   }
+   }*/
 
 	return a;
 }

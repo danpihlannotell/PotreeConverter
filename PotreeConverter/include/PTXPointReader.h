@@ -2,6 +2,8 @@
 #define PTXPOINTREADER_H
 
 #include <map>
+#include <string>
+#include <vector>
 #include "PointReader.h"
 
 using std::string;
@@ -32,8 +34,8 @@ private:
 
     fstream *stream;
     string path;
-    vector<string> files;
-    vector<string>::iterator currentFile;
+    std::vector<std::string> files;
+    std::vector<std::string>::iterator currentFile;
     Vector3<double> origin;
 
     /**

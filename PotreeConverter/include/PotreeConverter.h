@@ -59,7 +59,7 @@ public:
 	int storeSize = 20'000;
 	int flushLimit = 10'000'000;
 
-    PotreeConverter(string executablePath, string workDir, vector<string> sources);
+    PotreeConverter(string executablePath, string workDir, std::vector<std::string> sources);
 		
 	void convert();
 
