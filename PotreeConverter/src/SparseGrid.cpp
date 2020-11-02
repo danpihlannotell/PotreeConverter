@@ -148,7 +148,7 @@ bool SparseGrid::willBeAccepted(const Vector3<double> &p){
 	}
 }
 
-bool SparseGrid::add(Vector3<double> &p){
+bool SparseGrid::add(const Vector3<double> &p){
 	int nx = (int)(width*(p.x - aabb.min.x) / aabb.size.x);
 	int ny = (int)(height*(p.y - aabb.min.y) / aabb.size.y);
 	int nz = (int)(depth*(p.z - aabb.min.z) / aabb.size.z);

@@ -48,7 +48,7 @@ public:
 
 	bool willBeAccepted(const Vector3<double> &p, float &squaredSpacing);
 
-	bool add(Vector3<double> &p);
+	bool add(const Vector3<double> &p);
 
 	void addWithoutCheck(Vector3<double> &p);
 

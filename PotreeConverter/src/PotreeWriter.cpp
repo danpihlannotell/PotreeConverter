@@ -39,6 +39,7 @@ PWNode::PWNode(PotreeWriter* potreeWriter, AABB aabb){
 	this->potreeWriter = potreeWriter;
 	this->aabb = aabb;
 	this->grid = new SparseGrid(aabb, spacing());
+	store.reserve(100000);
 }
 
 PWNode::PWNode(PotreeWriter* potreeWriter, int index, AABB aabb, int level){
@@ -47,6 +48,7 @@ PWNode::PWNode(PotreeWriter* potreeWriter, int index, AABB aabb, int level){
 	this->level = level;
 	this->potreeWriter = potreeWriter;
 	this->grid = new SparseGrid(aabb, spacing());
+	store.reserve(100000);
 }
 
 PWNode::~PWNode(){
@@ -162,7 +164,7 @@ void PWNode ::split(){
 	store = vector<Point>();
 }
 
-PWNode *PWNode::add(Point &point){
+PWNode *PWNode::add(const Point &point){
 	addCalledSinceLastFlush = true;
 
 	if(!isInMemory){
@@ -464,6 +466,7 @@ PWNode* PWNode::findNode(string name){
 PotreeWriter::PotreeWriter(string workDir, ConversionQuality quality){
 	this->workDir = workDir;
 	this->quality = quality;
+	store.reserve(100000);
 }
 
 PotreeWriter::PotreeWriter(string workDir, AABB aabb, float spacing, int maxDepth, double scale, OutputFormat outputFormat, PointAttributes pointAttributes, ConversionQuality quality){
@@ -474,6 +477,7 @@ PotreeWriter::PotreeWriter(string workDir, AABB aabb, float spacing, int maxDept
 	this->maxDepth = maxDepth;
 	this->outputFormat = outputFormat;
 	this->quality = quality;
+	store.reserve(100000);
 
 	this->pointAttributes = pointAttributes;
 
@@ -536,13 +540,14 @@ void PotreeWriter::add(Point &p){
 }
 
 void PotreeWriter::processStore(){
-	vector<Point> st = store;
-	store = vector<Point>();
+	// vector<Point> st = store;
+	// store = vector<Point>();
+	
 
-	waitUntilProcessed();
+	// waitUntilProcessed();
 
-	storeThread = thread([this, st]{
-		for(Point p : st){
+	// storeThread = thread([this, st]{
+		for(const Point& p : store){
 			PWNode *acceptedBy = root->add(p);
 			if(acceptedBy != NULL){
 				tightAABB.update(p.position);
@@ -551,7 +556,8 @@ void PotreeWriter::processStore(){
 				numAccepted++;
 			}
 		}
-	});
+	// });
+	store.clear();
 }
 
 void PotreeWriter::flush(){

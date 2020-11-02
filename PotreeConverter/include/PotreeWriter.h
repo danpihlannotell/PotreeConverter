@@ -62,7 +62,7 @@ public:
 
 	void loadFromDisk();
 
-	PWNode *add(Point &point);
+	PWNode *add(const Point &point);
 
 	PWNode *createChild(int childIndex);
 
