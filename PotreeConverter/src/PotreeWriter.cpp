@@ -522,7 +522,7 @@ void PotreeWriter::waitUntilProcessed(){
 	}
 }
 
-void PotreeWriter::add(Point &p){
+void PotreeWriter::add(const Point &p){
 	if(numAdded == 0){
 		fs::path dataDir(workDir + "/data");
 		fs::path tempDir(workDir + "/temp");

@@ -134,7 +134,7 @@ public:
 
 	void waitUntilProcessed();
 
-	void add(Point &p);
+	void add(const Point &p);
 
 	void flush();
 
