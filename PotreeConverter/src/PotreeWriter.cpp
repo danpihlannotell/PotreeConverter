@@ -522,7 +522,73 @@ void PotreeWriter::waitUntilProcessed(){
 	}
 }
 
+void PotreeWriter::addPoints(const Point* const points, const size_t num_points)
+{
+	if(numAdded == 0)
+	{
+		fs::path dataDir(workDir + "/data");
+		fs::path tempDir(workDir + "/temp");
+
+		fs::create_directories(dataDir);
+		fs::create_directories(tempDir);
+	}
+
+	numAdded += num_points;
+
+	const Point p0 = points[0];
+	double min_x = p0.position.x;
+	double min_y = p0.position.y;
+	double min_z = p0.position.z;
+
+	double max_x = p0.position.x;
+	double max_y = p0.position.y;
+	double max_z = p0.position.z;
+
+	for(size_t k = 0; k < num_points; k++)
+	{
+		const Point p = points[k];
+		const PWNode *acceptedBy = root->add(p);
+		if(acceptedBy != NULL)
+		{
+			const Vector3<double> pos = p.position;
+			if(pos.x < min_x)
+			{
+				min_x = pos.x;
+			}
+			else if(pos.x > max_x)
+			{
+				max_x = pos.x;
+			}
+
+			if(pos.y < min_y)
+			{
+				min_y = pos.y;
+			}
+			if(pos.y > max_y)
+			{
+				max_y = pos.y;
+			}
+
+			if(pos.z < min_z)
+			{
+				min_z = pos.z;
+			}
+			else if(pos.z > max_z)
+			{
+				max_z = pos.z;
+			}
+
+			pointsInMemory++;
+			numAccepted++;
+		}
+	}
+	tightAABB.min = Vector3<double>(min_x, min_y, min_z);
+	tightAABB.max = Vector3<double>(max_x, max_y, max_z);
+	tightAABB.size = tightAABB.max - tightAABB.min;
+}
+
 void PotreeWriter::add(const Point &p){
+	assert(false && "Don't use this function now with the current changes!");
 	if(numAdded == 0){
 		fs::path dataDir(workDir + "/data");
 		fs::path tempDir(workDir + "/temp");
@@ -561,11 +627,11 @@ void PotreeWriter::processStore(){
 }
 
 void PotreeWriter::flush(){
-	processStore();
+	// processStore();
 
-	if(storeThread.joinable()){
-		storeThread.join();
-	}
+	// if(storeThread.joinable()){
+	// 	storeThread.join();
+	// }
 
 	//auto start = high_resolution_clock::now();
 

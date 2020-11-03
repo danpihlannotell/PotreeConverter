@@ -135,6 +135,7 @@ public:
 	void waitUntilProcessed();
 
 	void add(const Point &p);
+	void addPoints(const Point* const points, const size_t num_points);
 
 	void flush();
 
